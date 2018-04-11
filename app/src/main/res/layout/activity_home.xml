@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="yt.com.rxjavademo.HomeActivity">
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_basic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="基本用法" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_just"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="just" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="from" />
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="map" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_flatmap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="flatmap" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_zip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="zip" />
+
+</android.support.v7.widget.LinearLayoutCompat>
