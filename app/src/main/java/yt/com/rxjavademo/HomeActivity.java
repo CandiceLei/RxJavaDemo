@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
+import io.reactivex.FlowableEmitter;
+import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -48,6 +52,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         AppCompatButton btnFlatMap = (AppCompatButton) findViewById(R.id.btn_flatmap);
         btnFlatMap.setOnClickListener(this);
         ((AppCompatButton) findViewById(R.id.btn_zip)).setOnClickListener(this);
+        ((AppCompatButton) findViewById(R.id.btn_flowble)).setOnClickListener(this);
     }
 
 
@@ -166,9 +171,36 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //                testZip();
                 testZip1();
                 break;
+            case R.id.btn_flowble:
+                testFlowable();
+                break;
             default:
                 break;
         }
+    }
+
+    private void testFlowable() {
+        Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> e) throws Exception {
+                for (int i = 0; i < 6; i++) {
+                    e.onNext(i);
+                }
+
+                e.onComplete();
+            }
+        }, BackpressureStrategy.ERROR)
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.e(TAG, "integer:" + integer);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.e(TAG, "throwable:" + throwable.getMessage());
+                    }
+                });
     }
 
     private void testZip1() {
