@@ -177,14 +177,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public void subscribe(ObservableEmitter<Integer> e) throws Exception {
                 for (int i = 0; ; i++) {
                     e.onNext(i);
+                    SystemClock.sleep(2000);
                 }
             }
         }).subscribeOn(Schedulers.io())
+//                .filter(new Predicate<Integer>() {
+//                    @Override
+//                    public boolean test(Integer integer) throws Exception {
+//                        return integer % 10 == 0;
+//                    }
+//                })
+//                .sample(2000,TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Integer>() {
                     @Override
                     public void accept(Integer integer) throws Exception {
-                        SystemClock.sleep(2000);
+//                        SystemClock.sleep(2000);
                         Log.e(TAG, "integer:" + integer);
                     }
                 });
