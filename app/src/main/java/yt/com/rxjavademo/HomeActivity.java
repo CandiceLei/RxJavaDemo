@@ -198,6 +198,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 });
     }
 
+
     private void testZip() {
         Observable.zip(Observable.create(new ObservableOnSubscribe<Integer>() {
 
