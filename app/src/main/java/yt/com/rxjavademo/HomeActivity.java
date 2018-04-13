@@ -1,6 +1,7 @@
 package yt.com.rxjavademo;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
@@ -162,11 +163,31 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 });
                 break;
             case R.id.btn_zip:
-                testZip();
+//                testZip();
+                testZip1();
                 break;
             default:
                 break;
         }
+    }
+
+    private void testZip1() {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                for (int i = 0; ; i++) {
+                    e.onNext(i);
+                }
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        SystemClock.sleep(2000);
+                        Log.e(TAG, "integer:" + integer);
+                    }
+                });
     }
 
     private void testZip() {
@@ -175,13 +196,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void subscribe(ObservableEmitter<Integer> e) throws Exception {
 
-                        e.onNext(1);
-                        e.onNext(2);
-                        e.onNext(3);
-                        e.onNext(4);
-                        e.onNext(5);
-                        e.onNext(6);
-                        e.onComplete();
+                        for (int i = 0; ; i++) {
+                            e.onNext(i);
+                        }
+
+//                        e.onNext(1);
+//                        e.onNext(2);
+//                        e.onNext(3);
+//                        e.onNext(4);
+//                        e.onNext(5);
+//                        e.onNext(6);
+//                        e.onComplete();
                     }
                 }).subscribeOn(Schedulers.io())
                 , Observable.create(new ObservableOnSubscribe<String>() {
@@ -191,7 +216,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         e.onNext("test2");
                         e.onNext("test3");
                         e.onNext("test4");
-                        e.onComplete();
+//                        e.onComplete();
                     }
                 }).subscribeOn(Schedulers.io())
                 , new BiFunction<Integer, String, String>() {
@@ -204,6 +229,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void accept(String s) throws Exception {
                 Log.e(TAG, "zip:" + s);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Log.e(TAG, "throwable:" + throwable.getMessage());
             }
         });
     }
