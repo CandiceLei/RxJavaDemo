@@ -63,9 +63,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Observable.create(new ObservableOnSubscribe<String>() {
                     @Override
                     public void subscribe(ObservableEmitter<String> e) throws Exception {
-                        e.onNext("李白");
-                        e.onNext("杜甫");
-                        e.onNext("李贺");
+//                        e.onNext("李白");
+//                        e.onNext("杜甫");
+//                        e.onNext("李贺");
                         e.onComplete();
 //                        e.onError(new Throwable("测试"));
 //                        e.onNext("白居易");
